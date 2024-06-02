@@ -1,0 +1,24 @@
+---
+-name: install apache servers and run a index file
+host: all
+become: yes
+
+tasks:
+-name: install apache2 server
+ansible.builtin.apt:
+name: apache2
+state: present
+
+-name: start and enable the server
+ansible.builtin.apt:
+name: apache2
+state: start
+enabled: yes
+
+-name:run the application in the server
+ansible.builtin.copy
+src: index.html
+dest: var/www/html/
+owner: root
+group: root
+mode: '0644'
